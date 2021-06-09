@@ -1,0 +1,203 @@
+<p align="right"> <button class="cancel" (click)="onCancel()"><span class="material-icons">
+    highlight_off
+    </span></button></p>
+  
+    
+    <h3><b>EDIT</b></h3>
+    <mat-card>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="personalFormGroup">
+        <form [formGroup]="personalFormGroup">
+          <ng-template matStepLabel>Personal Details</ng-template>
+  
+          <mat-label><b>First Name</b></mat-label>
+          <mat-form-field class="data" appearance="fill">
+            <input matInput placeholder="First name" formControlName="firstname" [(ngModel)]="data.firstname">
+          </mat-form-field>
+  
+  
+  
+          <mat-label><b>Last Name</b></mat-label><br>
+          <mat-form-field class="data" appearance="fill">
+             
+              <input matInput placeholder="Last name" formControlName="lastname"[(ngModel)]="data.lastname" >
+          </mat-form-field >
+  
+  
+            <mat-label><b>Email Address</b></mat-label><br>
+            <mat-form-field class="data" appearance="fill">
+                
+                <input matInput placeholder="Email id" formControlName="email" [(ngModel)]="data.email" >
+              </mat-form-field><br>
+  
+  
+              
+  
+              <mat-label><b>Gender</b></mat-label> &nbsp;
+              <mat-radio-group aria-label="Select an option" formControlName="gender"  [(ngModel)]="data.gender">
+                  <mat-radio-button value="male">Male</mat-radio-button>&nbsp;
+                  <mat-radio-button value="female">Female</mat-radio-button>
+                </mat-radio-group><br><br>
+  
+                <mat-label><b>Mobile Number</b></mat-label><br>
+                <mat-form-field class="data" appearance="fill"> 
+                    <span matPrefix>+91 &nbsp;</span>
+                    <input type="text" matInput placeholder="mobile" formControlName="mobile" [(ngModel)]="data.mobile">
+                  </mat-form-field><br>
+          
+        
+          <div class="card-body text-center">
+            <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg">Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+  
+      <mat-step [stepControl]="educationFormGroup" label="Education Details">
+        <form [formGroup]="educationFormGroup">
+  
+            <mat-label><b>Enter your SSC/ 10th details</b></mat-label><br>
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Name of the School</mat-label>
+              <input matInput formControlName="sslcSchoolName" [(ngModel)]="data.sslcSchoolName">
+            </mat-form-field>
+  
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Year of Completion</mat-label>
+              <mat-select  formControlName="sslcYear" [(ngModel)]="data.sslcYear">
+                <mat-option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Percentage / CGPA</mat-label>
+              <input matInput formControlName="sslcMark" [(ngModel)]="data.sslcMark">
+            </mat-form-field>
+  
+            <mat-label><b>Enter your HSC/ 12th details</b></mat-label><br>
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Name of the School</mat-label>
+              <input matInput formControlName="hscSchoolName" [(ngModel)]="data.hscSchoolName">
+            </mat-form-field>
+  
+            
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Year of Completion</mat-label>
+              <mat-select   formControlName="hscYear"  [(ngModel)]="data.hscYear" >
+                <mat-option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Percentage / CGPA</mat-label>
+              <input matInput formControlName="hscMark" [(ngModel)]="data.hscMark">
+            </mat-form-field>
+  
+            <mat-label><b>Enter your Graduation details</b></mat-label><br>
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Name of the College/University</mat-label>
+              <input matInput formControlName="collegeName" [(ngModel)]="data.collegeName">
+            </mat-form-field>
+  
+            
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Year of Completion</mat-label>
+              <mat-select   formControlName="collegeDegree"  [(ngModel)]="data.collegeDegree" >
+                <mat-option *ngFor="let p of degree" [value]="p.name">
+                  {{ p.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Year of Completion</mat-label>
+              <mat-select   formControlName="collegeYear"  [(ngModel)]="data.collegeYear" >
+                <mat-option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+  
+            <mat-form-field class="data" appearance="fill">
+              <mat-label>Percentage / CGPA</mat-label>
+              <input matInput formControlName="collegeMark" [(ngModel)]="data.collegeMark">
+            </mat-form-field>
+            
+          <div class="card-body text-center">
+            <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg">Next</button>
+          </div>
+        </form>
+      </mat-step>
+  
+  
+        <mat-step [stepControl]="exFormGroup" label="Experience">
+          <form [formGroup]="exFormGroup">
+             
+            <mat-label><b>Name of the Organization</b></mat-label>
+              <mat-form-field class="data" appearance="fill">
+                <input matInput formControlName="companyName"  [(ngModel)]="data.companyName">
+              </mat-form-field>
+  
+  
+                <mat-label><b>Start Date</b></mat-label>
+                <mat-form-field class="data" appearance="fill">
+                  <input matInput  formControlName="startDate" [matDatepicker]="picker" [(ngModel)]="data.startDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+  
+                <mat-label><b>End Date</b></mat-label>
+                <mat-form-field class="data" appearance="fill">
+                  <input matInput formControlName="endDate" [matDatepicker]="picker1" [(ngModel)]="data.endDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+              
+              <mat-label><b>Description</b></mat-label>
+              <mat-form-field class="data" appearance="fill">
+                <textarea matInput formControlName="description"  [(ngModel)]="data.description"></textarea>
+              </mat-form-field><br><br>
+
+              <div class="card-body text-center">
+                <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg">Next</button>
+              </div>
+  
+          </form>
+          </mat-step>
+
+          <mat-step [stepControl]="skillFormGroup" label="Skills">
+            <form [formGroup]="skillFormGroup">
+               
+              <mat-label><b>Languages</b></mat-label>
+                <mat-form-field class="data" appearance="fill">
+                  <input  matInput formControlName="languages" [(ngModel)]="data.languages">
+                </mat-form-field>
+  
+              
+                
+                <mat-label><b>Technical Languages</b></mat-label>
+                <mat-form-field class="data" appearance="fill">
+                  <textarea  matInput formControlName="technicalSkills"  [(ngModel)]="data.technicalSkills"></textarea>
+                </mat-form-field><br><br>
+  
+    
+                
+              <div class="card-body text-center">
+                <button mat-stroked-button (click)="save()" class="btn btn-secondary btn-lg">Submit</button>&nbsp;&nbsp;
+                <button mat-stroked-button (click)="stepper.reset()" class="btn btn-secondary btn-lg">Reset</button>&nbsp;&nbsp;
+                <button mat-stroked-button (click)="onCancel()" class="btn btn-secondary btn-lg">Cancel</button>
+            </div>
+            </form>
+            </mat-step>
+    </mat-horizontal-stepper></mat-card>

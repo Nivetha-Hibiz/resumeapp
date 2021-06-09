@@ -1,0 +1,57 @@
+
+<mat-toolbar class="navbar">
+  <div>Resume Builder</div>
+</mat-toolbar>
+
+<div class="main-div ">
+  <mat-card style="width: 600px;" class="example-card ">
+   
+    <img mat-card-image src="/assets/image/img3.png" alt="Photo of a Shiba Inu">
+    <form [formGroup]="Form" (ngSubmit)="onSubmit()" class="mx-auto" >
+    <div class="form-group">
+    <label for="email">Email address</label>
+    <p>
+          
+          
+          <input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f?.email?.errors }" >
+          <span><i class="fa fa-envelope fa-fw"></i></span></p>
+          <div *ngIf="submitted && f?.email?.errors" class="invalid-feedback">
+            <div *ngIf="f?.email?.errors?.required">Email is required</div>
+            <div *ngIf="f?.email?.errors?.email">Email must be a valid email address</div>
+          </div>
+    
+    </div>
+    
+    
+
+    <label for="email">Password</label>
+    <div class="form-group">
+    <p>
+          <input [type]="repeatFieldTextType ? 'text' : 'password'" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f?.password?.errors }" > 
+           <span >
+                    <i
+                      class="fa"
+                      [ngClass]="{
+                        'fa-eye-slash': !repeatFieldTextType,
+                        'fa-eye': repeatFieldTextType
+                      }"
+                      (click)="toggleRepeatFieldTextType()"
+                    ></i>
+            </span>
+          </p>
+    </div>
+    <div class="alert" *ngIf="serverErrorMessages">
+      {{serverErrorMessages}}
+    </div>
+        <div class="card-body text-center">
+          <button mat-stroked-button type="submit"  class="btn btn-secondary btn-lg">Submit</button>&nbsp;&nbsp;
+        </div>
+        <div class="card-body text-center">
+          <label>Not registered?</label><a routerLink="/">Create an account</a>
+        </div>
+      </form>
+  <!-- Error message -->
+  
+</mat-card>
+</div>
+
