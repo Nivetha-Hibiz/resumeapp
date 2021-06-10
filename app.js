@@ -34,7 +34,9 @@ app.use((err, req, res, next) => {
         Object.keys(err.errors).forEach(key => valErrors.push(err.errors[key].message));
         res.status(422).send(valErrors)
     }
+
 });
+const port = Process.env.PORT || 8080 ;
 
 // start server
-app.listen(process.env.PORT, () => console.log(`Server started at port : ${process.env.PORT}`));
+app.listen(port, () => console.log(`Server started at port : ${process.env.PORT}`));
