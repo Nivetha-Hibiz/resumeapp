@@ -8,6 +8,10 @@
     "start": "node app.js",
     "postinstall": "ng build"
   },
+  "engines": {
+    "node": "v14.16.1",
+    "npm": "7.15.0"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
