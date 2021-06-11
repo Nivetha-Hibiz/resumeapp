@@ -21,7 +21,7 @@ export class RegisterComponent {
   profileForm = this.fb.group({
     firstName: ['',Validators.required],
     lastName: ['',Validators.required],
-    role: ['',Validators.required],
+    role: [''],
     email: ['',[Validators.required, Validators.email]],
     password: ['',[Validators.required, Validators.minLength(6)]],
     confirmPassword: ['',Validators.required]
@@ -41,6 +41,17 @@ export class RegisterComponent {
   saveTutorial() {
     
     this.submitted = true;
+
+    const datavalue = {
+      firstName: this.profileForm.controls['firstName'].value,
+      lastName: this.profileForm.controls['lastName'].value,
+      role: this.defaultrole,
+      email: this.profileForm.controls['email'].value,
+      password: this.profileForm.controls['password'].value,
+      
+
+    };
+
     if (this.profileForm.invalid) {
         return;
     }
@@ -56,7 +67,7 @@ export class RegisterComponent {
           console.log(error);
         });
        alert('success');*/
-       this.userservice?.postUser(this.profileForm.value).subscribe(
+       this.userservice?.postUser(datavalue).subscribe(
         res => {
           this.showSucessMessage= true;
           

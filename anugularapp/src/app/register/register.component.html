@@ -1,128 +1,116 @@
 <mat-card class="mat-card ">
-    <mat-card-title class="mat">Register</mat-card-title>
-    <form [formGroup]="profileForm" (ngSubmit)="saveTutorial()" >
+  <mat-card-title class="mat">Register</mat-card-title>
+  <form [formGroup]="profileForm" (ngSubmit)="saveTutorial()" >
 
-        <div class="form-group">
-          <label for="email">First Name <b class="data">*</b> </label>
-          <p>
-                
-                
-                <input class="inputfield" type="text" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f?.firstName?.errors }" placeholder="your firstname">
-                </p>
-                <div *ngIf="submitted && f?.firstName?.errors" >
-                  <div *ngIf="f?.firstName?.errors?.required" class="data">First Name is required</div>
-              </div>
-          
-          </div>
-          
-      
-        
-        <div class="form-group">
-          <label for="email">Last Name <b class="data">*</b> </label>
-          <p>
-                
-                
-                <input class="inputfield" type="text" type="text" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f?.lastName?.errors }"  placeholder="your lastname">
-                </p>
-                <div *ngIf="submitted && f?.lastName?.errors" >
-                  <div *ngIf="f?.lastName?.errors?.required" class="data">Last Name is required</div>
-                </div>
-          
-          </div>
-         
-        
-        <div class="form-group">
-          <label for="email">Role <b class="data">*</b> </label>
-          <p>
-                
-                
-                <input  class="inputfield" type="text" formControlName="role"  [(ngModel)]="defaultrole" [ngClass]="{ 'is-invalid': submitted && f?.role?.errors }" >
-               </p>
-                <div *ngIf="submitted && f?.role?.errors" >
-                  <div *ngIf="f?.role?.errors?.required" class="data">Role is required</div>
-                </div>
-          
-          </div>
-         
-
-
-        <div class="form-group">
-          <label for="email">Email <b class="data">*</b></label>
-          <p>
-                
-                
-                <input class="inputfield" type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f?.email?.errors }" >
-                </p>
-                <div *ngIf="submitted && f?.email?.errors">
-                  <div *ngIf="f?.email?.errors?.required" class="data">Email is required</div>
-                  <div *ngIf="f?.email?.errors?.email" class="data">Email must be a valid email address</div>
-                </div>
-          
-          </div>
-          
- 
-        <div class="form-group">
-        <label for="email">Password <b class="data">*</b></label>
+      <div class="form-group">
+        <label for="email">First Name <b class="data">*</b> </label>
         <p>
-          <input [type]="repeatFieldTextType ? 'text' : 'password'" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f?.password?.errors }" > 
+              
+              
+              <input class="inputfield" type="text" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f?.firstName?.errors }" placeholder="your firstname">
+              </p>
+              <div *ngIf="submitted && f?.firstName?.errors" >
+                <div *ngIf="f?.firstName?.errors?.required" class="data">First Name is required</div>
+            </div>
+        
+        </div>
+        
+    
+      
+      <div class="form-group">
+        <label for="email">Last Name <b class="data">*</b> </label>
+        <p>
+              
+              
+              <input class="inputfield" type="text" type="text" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f?.lastName?.errors }"  placeholder="your lastname">
+              </p>
+              <div *ngIf="submitted && f?.lastName?.errors" >
+                <div *ngIf="f?.lastName?.errors?.required" class="data">Last Name is required</div>
+              </div>
+        
+        </div>
+       
+      
+      
+       
+
+
+      <div class="form-group">
+        <label for="email">Email <b class="data">*</b></label>
+        <p>
+              
+              
+              <input class="inputfield" type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f?.email?.errors }" >
+              </p>
+              <div *ngIf="submitted && f?.email?.errors">
+                <div *ngIf="f?.email?.errors?.required" class="data">Email is required</div>
+                <div *ngIf="f?.email?.errors?.email" class="data">Email must be a valid email address</div>
+              </div>
+        
+        </div>
+        
+
+      <div class="form-group">
+      <label for="email">Password <b class="data">*</b></label>
+      <p>
+        <input [type]="repeatFieldTextType ? 'text' : 'password'" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f?.password?.errors }" > 
+         <span >
+                  <i
+                    class="fa"
+                    [ngClass]="{
+                      'fa-eye-slash': !repeatFieldTextType,
+                      'fa-eye': repeatFieldTextType
+                    }"
+                    (click)="toggleRepeatFieldTextType()"
+                  ></i>
+          </span>
+        </p>
+        <div *ngIf="submitted && f?.password?.errors" >
+          <div *ngIf="f?.password?.errors?.required" class="data">Password is required</div>
+          <div *ngIf="f?.password?.errors?.minlength"class="data">Password must be at least 6 characters</div>
+        </div>
+      </div>
+      
+
+      <div class="form-group">
+        <label for="email">Confirm Password <b class="data">*</b></label>
+        <p>
+          <input [type]="FieldTextType ? 'text' : 'password'" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f?.confirmPassword?.errors }" > 
            <span >
                     <i
                       class="fa"
                       [ngClass]="{
-                        'fa-eye-slash': !repeatFieldTextType,
-                        'fa-eye': repeatFieldTextType
+                        'fa-eye-slash': !FieldTextType,
+                        'fa-eye': FieldTextType
                       }"
-                      (click)="toggleRepeatFieldTextType()"
+                      (click)="toggleFieldTextType()"
                     ></i>
             </span>
           </p>
-          <div *ngIf="submitted && f?.password?.errors" >
-            <div *ngIf="f?.password?.errors?.required" class="data">Password is required</div>
-            <div *ngIf="f?.password?.errors?.minlength"class="data">Password must be at least 6 characters</div>
-          </div>
+          <div *ngIf="submitted && f?.confirmPassword?.errors" >
+            <div *ngIf="f?.confirmPassword?.errors?.required" class="data">Confirm Password is required</div>
+            <div *ngIf="f?.confirmPassword?.errors?.mustMatch" class="data">Passwords must match</div>
         </div>
-        
-
-        <div class="form-group">
-          <label for="email">Confirm Password <b class="data">*</b></label>
-          <p>
-            <input [type]="FieldTextType ? 'text' : 'password'" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && f?.confirmPassword?.errors }" > 
-             <span >
-                      <i
-                        class="fa"
-                        [ngClass]="{
-                          'fa-eye-slash': !FieldTextType,
-                          'fa-eye': FieldTextType
-                        }"
-                        (click)="toggleFieldTextType()"
-                      ></i>
-              </span>
-            </p>
-            <div *ngIf="submitted && f?.confirmPassword?.errors" >
-              <div *ngIf="f?.confirmPassword?.errors?.required" class="data">Confirm Password is required</div>
-              <div *ngIf="f?.confirmPassword?.errors?.mustMatch" class="data">Passwords must match</div>
-          </div>
-          </div>
+        </div>
 
 
 
-        <div class="card-body text-center">
-        <button mat-stroked-button type="submit"  class="btn btn-secondary btn-lg">Submit</button>&nbsp;&nbsp;
-        <button mat-stroked-button type="reset" (click)="onReset()" class="btn btn-secondary btn-lg">Reset</button>&nbsp;&nbsp;
-        <button mat-stroked-button class="btn btn-secondary btn-lg" [mat-dialog-close]>Close</button>
-      </div>
-        
-        
-      </form>
-    
-      <div class="success card-body text-center" *ngIf="showSucessMessage">
-        Saved successfully
-      </div>
+      <div class="card-body text-center">
+      <button mat-stroked-button type="submit"  class="btn btn-secondary btn-lg">Submit</button>&nbsp;&nbsp;
+      <button mat-stroked-button type="reset" (click)="onReset()" class="btn btn-secondary btn-lg">Reset</button>&nbsp;&nbsp;
+      <button mat-stroked-button class="btn btn-secondary btn-lg" [mat-dialog-close]>Close</button>
+    </div>
       
-      <!-- Error message -->
-      <div class="alert card-body text-center" *ngIf="serverErrorMessages">
-        {{serverErrorMessages}}
-      </div>
-    
-    </mat-card>
+      
+    </form>
   
+    <div class="success card-body text-center" *ngIf="showSucessMessage">
+      Saved successfully
+    </div>
+    
+    <!-- Error message -->
+    <div class="alert card-body text-center" *ngIf="serverErrorMessages">
+      {{serverErrorMessages}}
+    </div>
+  
+  </mat-card>

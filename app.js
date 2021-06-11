@@ -2,6 +2,7 @@ require('./config/config');
 require('./models/db');
 require('./config/passportConfig');
 var formController = require('./controllers/formController.js');
+var college = require('./controllers/college.js');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -18,6 +19,7 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(passport.initialize());
 app.use('/api', rtsIndex);
 app.use('/form', formController);
+app.use('/college', college);
 
 
 app.use(express.static(path.join(__dirname, 'public')));

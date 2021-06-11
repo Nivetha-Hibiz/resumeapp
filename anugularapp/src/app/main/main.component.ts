@@ -7,6 +7,8 @@ import { CreateComponent } from '../create/create.component';
 import { UserService } from '../user.service';
 import { Router } from "@angular/router";
 import { ResumeService } from '../resume.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-main',
@@ -122,8 +124,16 @@ export class MainComponent implements OnInit {
   }
 
   deleteTutorial(_id: any) {
-    if (confirm('Are you sure to delete this record ?') == true){
-    console.log(_id)
+    Swal.fire({
+      title: 'Are you sure want to delete?',
+      text: 'You will not be able to recover later!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(_id)
     this.resumeService?.delete(_id)
       .subscribe(
         response => {
@@ -132,9 +142,13 @@ export class MainComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });
+        });}
+        else if (result.dismiss === Swal.DismissReason.cancel) {
+  
+        }
+      })
         
-  }
+  
   }
   reloadPage() {
     window.location.reload();

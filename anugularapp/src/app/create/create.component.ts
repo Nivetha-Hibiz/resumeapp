@@ -1,7 +1,9 @@
 import { Component, OnInit ,Output,  EventEmitter,Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators ,FormArray, FormControl} from '@angular/forms';
 import { ResumeService } from '../resume.service';
+import { CollegeService } from '../college.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -11,6 +13,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CreateComponent implements OnInit {
   
+
+  FieldTextType!: boolean;
+  public textvalue?: string;
+  
+  districts : any;
+  states : any;
+  values  : any;
   allyears = [
     {name: '1980'},{name: '1981'},{name: '1982'},{name: '1983'},{name: '1984'},{name: '1985'},{name: '1986'},{name: '1987'},{name: '1988'},{name: '1989'},{name: '1990'},
     {name: '1991'},{name: '1992'},{name: '1993'},{name: '1994'},{name: '1995'},{name: '1996'},{name: '1997'},{name: '1998'},{name: '1999'},{name: '2000'},
@@ -33,7 +42,7 @@ export class CreateComponent implements OnInit {
   ];
 
 
-
+  submitted = false;
   personalvalue: any;
   educationvalue:any;
   workvalue:any;
@@ -45,7 +54,7 @@ export class CreateComponent implements OnInit {
   skillFormGroup!:FormGroup;
   emailvalue?: string;
   serverErrorMessages?: string;
-  constructor(private _formBuilder: FormBuilder,private resumeService?: ResumeService,
+  constructor(private _formBuilder: FormBuilder,private resumeService?: ResumeService,private taskService?: CollegeService,
     
 
     public dialogRef?: MatDialogRef<CreateComponent>,
@@ -69,21 +78,23 @@ export class CreateComponent implements OnInit {
     this.educationFormGroup = this._formBuilder.group({
       sslcSchoolName: [''],
       sslcYear: ['',Validators.required],
-      sslcMark: ['',Validators.required],
+      sslcMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
       hscSchoolName: [''],
       hscYear: ['',Validators.required],
-      hscMark: ['',Validators.required],
-      collegeName: [''],
+      hscMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      colname: [''],
       collegeDegree: [''],
       collegeYear: ['',Validators.required],
-      collegeMark: ['',Validators.required]
+      collegeMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      
 
     });
     this.exFormGroup = this._formBuilder.group({
       companyName: [''],
       startDate: [''],
       endDate: [''],
-      description: ['']
+      description: [''],
+      
 
     });
     this.skillFormGroup = this._formBuilder.group({
@@ -92,11 +103,30 @@ export class CreateComponent implements OnInit {
     
     });
 
+    this.taskService?.state()
+    .subscribe(
+      response => {
+        this.states=response;
+        this.states.sort();
+       
+        
+        
+      },
+      error => {
+       console.log(error);
+      }
+      );
+
   }
+
+  get f() { return this.personalFormGroup.controls; }
+  get e() { return this.educationFormGroup.controls; }
+
 
   save(){
 
-
+    this.SubmitSkill();
+    this.submitted = true;
     console.log(this.data.email)
     const datavalue = {
       firstname: this.personalFormGroup.controls['firstname'].value,
@@ -110,7 +140,7 @@ export class CreateComponent implements OnInit {
       hscSchoolName: this.educationFormGroup.controls['hscSchoolName'].value,
       hscYear: this.educationFormGroup.controls['hscYear'].value,
       hscMark: this.educationFormGroup.controls['hscMark'].value,
-      collegeName: this.educationFormGroup.controls['collegeName'].value,
+      collegeName: this.educationFormGroup.controls['colname'].value,
       collegeDegree: this.educationFormGroup.controls['collegeDegree'].value,
       collegeYear: this.educationFormGroup.controls['collegeYear'].value,
       collegeMark: this.educationFormGroup.controls['collegeMark'].value,
@@ -130,7 +160,7 @@ export class CreateComponent implements OnInit {
         response => {
           console.log(response);
           this.resumeService?.setEmail(response)
-          this.reloadPage();
+           
         },
         error => {
           if (error.status === 422) {
@@ -140,7 +170,17 @@ export class CreateComponent implements OnInit {
             this.serverErrorMessages = 'Something went wrong.Please contact admin.';
         }
         );
-       alert('success');
+        Swal.fire({
+          title: 'Success',
+          text: 'Your data has been saved successfully!',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.reloadPage();
+          }
+        })
   }
   reloadPage() {
     window.location.reload();
@@ -152,16 +192,19 @@ export class CreateComponent implements OnInit {
  
 
   SubmitPersonal(){
+    this.submitted = true;
     localStorage.setItem('per' + this.data.email, JSON.stringify(this.personalFormGroup.value));
    
   }
   
   SubmitEducation(){
+    this.submitted = true;
     localStorage.setItem('edu' + this.data.email, JSON.stringify(this.educationFormGroup.value));
    
   }
 
   SubmitWork(){
+    this.submitted = true;
     localStorage.setItem('work' + this.data.email, JSON.stringify(this.exFormGroup.value));
    
   }
@@ -180,8 +223,58 @@ export class CreateComponent implements OnInit {
 
   }
 
- 
 
+  savestate(){
+    const data={
+      state:this.educationFormGroup.controls['colname'].value,
+    }
+    console.log(data)
+    this.taskService?.district(data)
+      .subscribe(
+        response => {
+          this.districts=response;
+          this.districts.sort();
+         
+          
+          
+        },
+        error => {
+         console.log(error);
+        }
+        );
+  }
+  
+  savebutton()
+  {
+    const data={
+      district:this.educationFormGroup.controls['colname'].value,
+    }
+    
+    this.taskService?.create(data)
+      .subscribe(
+        response => {
+          this.values=response;
+          this.values.sort();
+          
+          
+          
+        },
+        error => {
+         console.log(error);
+        }
+        );
+  }
+
+  
+  savevalue(){
+    if(this.textvalue == "Others")
+    {
+      console.log(this.FieldTextType)
+      this.FieldTextType = !this.FieldTextType;
+    }
+  }
+
+ 
 }
 
 

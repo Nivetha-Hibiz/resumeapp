@@ -1,29 +1,83 @@
 .data{
-    width: 100%;
-    
-    display: inline-block;
+  width: 100%;
   
+  display: inline-block;
+
+}
+
+.cancel{
+  background-color: white;
+  border: none;
+  
+}
+
+label{
+  width:100%;
+}
+
+button:hover{
+  
+  font-size: large;
+  }
+  button{
+      font-size:20px;
+  }
+  .mat-card{
+      background-color: rgb(58, 56, 56);
   }
 
-  .cancel{
-    background-color: white;
-    border: none;
-    
-  }
 
-  label{
-    width:100%;
-  }
+     
+.red{
+  color:red;
+}
+  
 
-  button:hover{
-    
-    font-size: large;
-    }
-    button{
-        font-size:20px;
-    }
-    .mat-card{
-        background-color: rgb(58, 56, 56);
-    }
+select{
+  padding: 10px;
+  width:100%;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
 
-   
+textarea{
+
+  padding: 10px;
+  width:100%;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+
+
+
+
+input[type=text], [type=password], [type=number]{
+  padding: 10px;
+  width:100%;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input.datepicker{
+  width:710px;
+}
+
+
+
+
+
+
+
+
+
+
+
+ 

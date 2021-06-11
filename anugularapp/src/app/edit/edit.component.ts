@@ -2,6 +2,7 @@ import { Component, OnInit , Inject ,Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators ,FormArray, FormControl} from '@angular/forms';
 import { ResumeService } from '../resume.service';
+import { CollegeService } from '../college.service';
 
 @Component({
   selector: 'app-edit',
@@ -10,7 +11,12 @@ import { ResumeService } from '../resume.service';
 })
 export class EditComponent implements OnInit{
  
-
+  FieldTextType!: boolean;
+  public textvalue?: string;
+  
+  districts : any;
+  states : any;
+  values  : any;
   allyears = [
     {name: '1980'},{name: '1981'},{name: '1982'},{name: '1983'},{name: '1984'},{name: '1985'},{name: '1986'},{name: '1987'},{name: '1988'},{name: '1989'},{name: '1990'},
     {name: '1991'},{name: '1992'},{name: '1993'},{name: '1994'},{name: '1995'},{name: '1996'},{name: '1997'},{name: '1998'},{name: '1999'},{name: '2000'},
@@ -33,7 +39,7 @@ export class EditComponent implements OnInit{
   ];
 
 
-
+  submitted = false;
   firstname?:'';
   isLinear = true;
   personalFormGroup!: FormGroup;
@@ -42,7 +48,7 @@ export class EditComponent implements OnInit{
   skillFormGroup!:FormGroup;
   emailvalue?: string;
 
-  constructor(private _formBuilder: FormBuilder,private resumeService?: ResumeService,
+  constructor(private _formBuilder: FormBuilder,private resumeService?: ResumeService,private taskService?: CollegeService,
 
     public dialogRef?: MatDialogRef<EditComponent>,
     @Inject(MAT_DIALOG_DATA) public data?: any) { }
@@ -50,23 +56,25 @@ export class EditComponent implements OnInit{
   ngOnInit(): void {
     this.personalFormGroup = this._formBuilder.group({
       _id:[''],
-      firstname: [''],
-      lastname: [''],
-      email: [''],
-      mobile: [''],
-      gender:['']
+      firstname: ['',Validators.required],
+      lastname: ['',Validators.required],
+      email: [{value: '', disabled: true}],
+      mobile: ['',[Validators.required, Validators.pattern("^[0-9]*$"),
+      Validators.minLength(10), Validators.maxLength(10)]],
+      gender:['',Validators.required]
     });
     this.educationFormGroup = this._formBuilder.group({
       sslcSchoolName: [''],
-      sslcYear: [''],
-      sslcMark: [''],
+      sslcYear: ['',Validators.required],
+      sslcMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
       hscSchoolName: [''],
-      hscYear: [''],
-      hscMark: [''],
-      collegeName: [''],
+      hscYear: ['',Validators.required],
+      hscMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      colname: [''],
       collegeDegree: [''],
-      collegeYear: [''],
-      collegeMark: ['']
+      collegeYear: ['',Validators.required],
+      collegeMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      
 
     });
     this.exFormGroup = this._formBuilder.group({
@@ -81,12 +89,29 @@ export class EditComponent implements OnInit{
       technicalSkills: ['']
     
     });
+    this.taskService?.state()
+    .subscribe(
+      response => {
+        this.states=response;
+        this.states.sort();
+       
+        
+        
+      },
+      error => {
+       console.log(error);
+      }
+      );
 
   }
 
+  get f() { return this.personalFormGroup.controls; }
+  get e() { return this.educationFormGroup.controls; }
+
+
   save(){
 
-
+    this.submitted = true;
     const datavalue = {
       firstname: this.personalFormGroup.controls['firstname'].value,
       lastname: this.personalFormGroup.controls['lastname'].value,
@@ -99,7 +124,7 @@ export class EditComponent implements OnInit{
       hscSchoolName: this.educationFormGroup.controls['hscSchoolName'].value,
       hscYear: this.educationFormGroup.controls['hscYear'].value,
       hscMark: this.educationFormGroup.controls['hscMark'].value,
-      collegeName: this.educationFormGroup.controls['collegeName'].value,
+      collegeName: this.educationFormGroup.controls['colname'].value,
       collegeDegree: this.educationFormGroup.controls['collegeDegree'].value,
       collegeYear: this.educationFormGroup.controls['collegeYear'].value,
       collegeMark: this.educationFormGroup.controls['collegeMark'].value,
@@ -130,6 +155,60 @@ export class EditComponent implements OnInit{
   onCancel(): void {
     this.dialogRef?.close();
   }
+
+
+  
+  savestate(){
+    const data={
+      state:this.educationFormGroup.controls['colname'].value,
+    }
+    console.log(data)
+    this.taskService?.district(data)
+      .subscribe(
+        response => {
+          this.districts=response;
+          this.districts.sort();
+         
+          
+          
+        },
+        error => {
+         console.log(error);
+        }
+        );
+  }
+  
+  savebutton()
+  {
+    const data={
+      district:this.educationFormGroup.controls['colname'].value,
+    }
+    
+    this.taskService?.create(data)
+      .subscribe(
+        response => {
+          this.values=response;
+          this.values.sort();
+          
+          
+          
+        },
+        error => {
+         console.log(error);
+        }
+        );
+  }
+
+  
+  savevalue(){
+    if(this.textvalue == "Others")
+    {
+      console.log(this.FieldTextType)
+      this.FieldTextType = !this.FieldTextType;
+    }
+  }
+
+
 
 
   }
