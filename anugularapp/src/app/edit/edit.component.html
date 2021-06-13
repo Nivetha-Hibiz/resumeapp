@@ -62,7 +62,7 @@
 
       
         <div class="card-body text-center">
-          <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg">Next</button>
+          <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="Submitform()" >Next</button>
         </div>
       </form>
     </mat-step>
@@ -100,8 +100,8 @@
       
         <div *ngIf="submitted && e?.sslcMark?.errors" >
           <div *ngIf="e?.sslcMark?.errors?.required" class="red">10th Mark is required</div>
-          <div *ngIf="e?.sslcMark?.errors?.minlength" class="red">Enter the marks  correctly</div>
-          <div *ngIf="e?.sslcMark?.errors?.maxlength" class="red">Enter the marks  correctly</div>
+          <div *ngIf="e?.sslcMark?.errors?.max" class="red">enter the correct percentage</div>
+          <div *ngIf="e?.sslcMark?.errors?.min" class="red">Invalid marks</div>
       </div>
       </div><br>
 
@@ -137,8 +137,8 @@
         <input   type="number"  formControlName="hscMark" [(ngModel)]="data.hscMark" [ngClass]="{ 'is-invalid': submitted && e?.hscMark?.errors }">
         <div *ngIf="submitted && e?.hscMark?.errors" >
           <div *ngIf="e?.hscMark?.errors?.required" class="red">12th Mark is required</div>
-          <div *ngIf="e?.hscMark?.errors?.minlength" class="red">Enter the marks  correctly</div>
-          <div *ngIf="e?.hscMark?.errors?.maxlength" class="red">Enter the marks  correctly</div>
+          <div *ngIf="e?.hscMark?.errors?.max" class="red">enter the correct percentage</div>
+          <div *ngIf="e?.hscMark?.errors?.min" class="red">Invalid marks</div>
       </div>
       </div><br>
     
@@ -175,19 +175,6 @@
       </div><br>
 
 
-
-      <div class="form-group">
-        <label>Degree/Branch</label>
-        <select [(ngModel)] = "textvalue" (click)="savevalue()" formControlName="collegeDegree" [(ngModel)]="data.collegeDegree">
-          <option *ngFor="let p of degree" [value]="p.name">
-            {{ p.name}}
-          </option>
-        </select>
-      </div>
-
-      <input [type]="FieldTextType ? 'text' : 'hidden'"  formControlName="collegeDegree"> <br>
-
-      
       <div class="form-group">
         <label>Year of Completion<b class="red">*</b></label>
         <select   formControlName="collegeYear" [(ngModel)]="data.collegeYear" >
@@ -210,14 +197,27 @@
      
       <div *ngIf="submitted && e?.collegeMark?.errors" >
         <div *ngIf="e?.collegeMark?.errors?.required" class="red">College Mark is required</div>
+        <div *ngIf="e?.collegeMark?.errors?.max" class="red">enter the correct percentage/CGPA</div>
+        <div *ngIf="e?.collegeMark?.errors?.min" class="red">Invalid marks</div>
       
     </div>
     </div><br>
   
-      
+    <div class="form-group">
+      <label>Degree/Branch</label><h5 class="optiontype">(If Others,enter your degree/branch after clicking others)</h5>
+      <select [(ngModel)] = "textvalue" (click)="savevalue()" formControlName="collegeDegree" [(ngModel)]="data.collegeDegree">
+        <option *ngFor="let p of degree" [value]="p.name">
+          {{ p.name}}
+        </option>
+      </select>
+    </div><br>
+
+    <label *ngIf="FieldTextType">Enter your Degree/Branch</label>
+    <input [type]="FieldTextType ? 'text' : 'hidden'"  formControlName="collegeDegree"> <br>
+
         <div class="card-body text-center">
           <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg">Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg">Next</button>
+          <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="Submitform()" >Next</button>
         </div>
       </form>
     </mat-step>

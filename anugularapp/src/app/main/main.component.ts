@@ -116,11 +116,25 @@ export class MainComponent implements OnInit {
   } 
    
 
+  
   onLogout(){
+    Swal.fire({
+      title: 'Are you sure want to Logout?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
     this.rolevalue=false
     this.userService.deleteToken();
     this.router.navigate(['/']);
     console.log(this.userDetails);
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+  
+      }
+    })
   }
 
   deleteTutorial(_id: any) {

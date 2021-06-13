@@ -1,339 +1,340 @@
 <p align="right"> <button class="cancel" (click)="Submitvalue()"><span class="material-icons">
-  highlight_off
-  </span></button></p>
-<mat-card >
-    <mat-horizontal-stepper [linear]="isLinear" #stepper>
-      <mat-step [stepControl]="personalFormGroup" >
-        
-        <form [formGroup]="personalFormGroup">
-          <ng-template matStepLabel>Personal Details</ng-template>
-
-         
-
-          <div class="form-group">
-            <label for="email">First Name<b class="red">*</b> </label>
-                  <input  type="text" formControlName="firstname" [(ngModel)]="data.firstName" [ngClass]="{ 'is-invalid': submitted && f?.firstname?.errors }">
-                  <div *ngIf="submitted && f?.firstname?.errors" >
-                    <div *ngIf="f?.firstname?.errors?.required" class="red">First Name is required</div>
-                </div>
-            </div><br>
-
+    highlight_off
+    </span></button></p>
+  <mat-card >
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="personalFormGroup" >
+          
+          <form [formGroup]="personalFormGroup">
+            <ng-template matStepLabel>Personal Details</ng-template>
+  
+           
 
             <div class="form-group">
-              <label for="email">Last Name<b class="red">*</b> </label>
-              <input  type="text"  formControlName="lastname" [(ngModel)]="data.lastName" [ngClass]="{ 'is-invalid': submitted && f?.lastname?.errors }">
-              <div *ngIf="submitted && f?.lastname?.errors" >
-                <div *ngIf="f?.lastname?.errors?.required" class="red">Last Name is required</div>
-            </div>
-            </div><br>
-
-
-
-            <div class="form-group">
-              <label>Email<b class="red">*</b></label>
-                <input  type="text"  formControlName="email" [(ngModel)]="data.email" [ngClass]="{ 'is-invalid': submitted && f?.email?.errors }" >
-                <div *ngIf="submitted && f?.email?.errors">
-                  <div *ngIf="f?.email?.errors?.required" class="data">Email is required</div>
-                  <div *ngIf="f?.email?.errors?.email" class="data">Email must be a valid email address</div>
-                </div>
+              <label for="email">First Name<b class="red">*</b> </label>
+                    <input  type="text" formControlName="firstname" [(ngModel)]="data.firstName" [ngClass]="{ 'is-invalid': submitted && f?.firstname?.errors }">
+                    <div *ngIf="submitted && f?.firstname?.errors" >
+                      <div *ngIf="f?.firstname?.errors?.required" class="red">First Name is required</div>
+                  </div>
               </div><br>
-
-
-              <mat-label>Gender<b class="red">*</b></mat-label> &nbsp;
-              <mat-radio-group *ngIf="personalvalue" aria-label="Select an option" formControlName="gender" [(ngModel)]="personalvalue.gender">
+  
+  
+              <div class="form-group">
+                <label for="email">Last Name<b class="red">*</b> </label>
+                <input  type="text"  formControlName="lastname" [(ngModel)]="data.lastName" [ngClass]="{ 'is-invalid': submitted && f?.lastname?.errors }">
+                <div *ngIf="submitted && f?.lastname?.errors" >
+                  <div *ngIf="f?.lastname?.errors?.required" class="red">Last Name is required</div>
+              </div>
+              </div><br>
+  
+  
+  
+              <div class="form-group">
+                <label>Email<b class="red">*</b></label>
+                  <input  type="text"  formControlName="email" [(ngModel)]="data.email" [ngClass]="{ 'is-invalid': submitted && f?.email?.errors }" >
+                  <div *ngIf="submitted && f?.email?.errors">
+                    <div *ngIf="f?.email?.errors?.required" class="data">Email is required</div>
+                    <div *ngIf="f?.email?.errors?.email" class="data">Email must be a valid email address</div>
+                  </div>
+                </div><br>
+  
+  
+                <mat-label>Gender<b class="red">*</b></mat-label> &nbsp;
+                <mat-radio-group *ngIf="personalvalue" aria-label="Select an option" formControlName="gender" [(ngModel)]="personalvalue.gender">
+                    <mat-radio-button value="male">Male</mat-radio-button>&nbsp;
+                    <mat-radio-button value="female">Female</mat-radio-button>
+                </mat-radio-group><br><br>
+                <mat-radio-group *ngIf="!personalvalue" aria-label="Select an option" formControlName="gender">
                   <mat-radio-button value="male">Male</mat-radio-button>&nbsp;
                   <mat-radio-button value="female">Female</mat-radio-button>
-              </mat-radio-group><br><br>
-              <mat-radio-group *ngIf="!personalvalue" aria-label="Select an option" formControlName="gender">
-                <mat-radio-button value="male">Male</mat-radio-button>&nbsp;
-                <mat-radio-button value="female">Female</mat-radio-button>
-            </mat-radio-group><br>
+              </mat-radio-group><br>
 
 
-            <div class="form-group">
-              <label>Mobile Number<b class="red">*</b> </label>
-             
-              <input *ngIf="personalvalue" type="text"   formControlName="mobile" [(ngModel)]="personalvalue.mobile" [ngClass]="{ 'is-invalid': submitted && f?.mobile?.errors }">
-              <input *ngIf="!personalvalue" type="text"  formControlName="mobile"  >
-              <div *ngIf="submitted && f?.mobile?.errors" >
-                <div *ngIf="f?.mobile?.errors?.required" class="red">Mobile Number is required</div>
-                <div *ngIf="f?.mobile?.errors?.minlength" class="red">Enter 10 digits correctly</div>
-                <div *ngIf="f?.mobile?.errors?.maxlength" class="red">Enter 10 digits correctly</div>
+              <div class="form-group">
+                <label>Mobile Number<b class="red">*</b> </label>
+               
+                <input *ngIf="personalvalue" type="text"   formControlName="mobile" [(ngModel)]="personalvalue.mobile" [ngClass]="{ 'is-invalid': submitted && f?.mobile?.errors }">
+                <input *ngIf="!personalvalue" type="text"  formControlName="mobile"  >
+                <div *ngIf="submitted && f?.mobile?.errors" >
+                  <div *ngIf="f?.mobile?.errors?.required" class="red">Mobile Number is required</div>
+                  <div *ngIf="f?.mobile?.errors?.minlength" class="red">Enter 10 digits correctly</div>
+                  <div *ngIf="f?.mobile?.errors?.maxlength" class="red">Enter 10 digits correctly</div>
+              </div>
+                </div><br>
+  
+  
+  
+                  
+            
+            <div class="card-body text-center">
+              <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="SubmitPersonal()">Save & Next</button>
             </div>
+          </form>
+         
+        </mat-step>
+  
+  
+        <mat-step [stepControl]="educationFormGroup" label="Education Details">
+          <form [formGroup]="educationFormGroup">
+  
+              <mat-label><b>Enter your SSLC/ 10th details</b></mat-label><br>
+
+              <div class="form-group">
+                <label>Name of the School</label>
+                <input *ngIf="educationvalue"  type="text"   formControlName="sslcSchoolName" [(ngModel)]="educationvalue.sslcSchoolName">
+                <input *ngIf="!educationvalue"   type="text"  formControlName="sslcSchoolName" >
               </div><br>
 
 
-
-                
-          
-          <div class="card-body text-center">
-            <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="SubmitPersonal()">Save & Next</button>
-          </div>
-        </form>
-       
-      </mat-step>
-
-
-      <mat-step [stepControl]="educationFormGroup" label="Education Details">
-        <form [formGroup]="educationFormGroup">
-
-            <mat-label><b>Enter your SSLC/ 10th details</b></mat-label><br>
-
+             
             <div class="form-group">
-              <label>Name of the School</label>
-              <input *ngIf="educationvalue"  type="text"   formControlName="sslcSchoolName" [(ngModel)]="educationvalue.sslcSchoolName">
-              <input *ngIf="!educationvalue"   type="text"  formControlName="sslcSchoolName" >
+              <label>Year of Completion<b class="red">*</b></label>
+              <select  *ngIf="educationvalue" formControlName="sslcYear" [(ngModel)]="educationvalue.sslcYear" >
+                <option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </option>
+              </select>
+              <select  *ngIf="!educationvalue" formControlName="sslcYear" [ngClass]="{ 'is-invalid': submitted && e?.sslcYear?.errors }"  >
+                <option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </option>
+              </select>
+              <div *ngIf="submitted && e?.sslcYear?.errors" >
+                <div *ngIf="e?.sslcYear?.errors?.required" class="red">10th std year is required</div>
+                
+            </div>
             </div><br>
 
+            
+            <div class="form-group">
+              <label>Percentage<b class="red">*</b></label>
+              <input *ngIf="educationvalue"  type="number"  formControlName="sslcMark" [(ngModel)]="educationvalue.sslcMark" [ngClass]="{ 'is-invalid': submitted && e?.sslcMark?.errors }">
+              <input *ngIf="!educationvalue"   type="number" formControlName="sslcMark" [ngClass]="{ 'is-invalid': submitted && e?.sslcMark?.errors }">
+              <div *ngIf="submitted && e?.sslcMark?.errors" >
+                <div *ngIf="e?.sslcMark?.errors?.required" class="red">10th Mark is required</div>
+                <div *ngIf="e?.sslcMark?.errors?.max" class="red">enter the correct percentage</div>
+                <div *ngIf="e?.sslcMark?.errors?.min" class="red">Invalid marks</div>
+            </div>
+            </div><br>
+  
+  
+            
+  
+            <mat-label><b>Enter your HSC/ 12th details</b></mat-label><br>
+
+            <div class="form-group">
+              <label>Name of the School </label>
+              <input *ngIf="educationvalue"  type="text" formControlName="hscSchoolName" [(ngModel)]="educationvalue.hscSchoolName" >
+              <input *ngIf="!educationvalue"   type="text" formControlName="hscSchoolName" >
+            </div><br>
+
+            <div class="form-group">
+              <label>Year of Completion<b class="red">*</b></label>
+              <select  *ngIf="educationvalue"  formControlName="hscYear" [(ngModel)]="educationvalue.hscYear" >
+                <option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </option>
+              </select>
+              <select  *ngIf="!educationvalue"  formControlName="hscYear" [ngClass]="{ 'is-invalid': submitted && e?.hscYear?.errors }"  >
+                <option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </option>
+              </select>
+              <div *ngIf="submitted && e?.hscYear?.errors" >
+                <div *ngIf="e?.hscYear?.errors?.required" class="red">12th std year is required</div>
+                
+            </div>
+            </div><br>
 
            
-          <div class="form-group">
-            <label>Year of Completion<b class="red">*</b></label>
-            <select  *ngIf="educationvalue" formControlName="sslcYear" [(ngModel)]="educationvalue.sslcYear" >
-              <option *ngFor="let p of allyears" [value]="p.name">
-                {{ p.name }}
-              </option>
-            </select>
-            <select  *ngIf="!educationvalue" formControlName="sslcYear" [ngClass]="{ 'is-invalid': submitted && e?.sslcYear?.errors }"  >
-              <option *ngFor="let p of allyears" [value]="p.name">
-                {{ p.name }}
-              </option>
-            </select>
-            <div *ngIf="submitted && e?.sslcYear?.errors" >
-              <div *ngIf="e?.sslcYear?.errors?.required" class="red">10th std year is required</div>
-              
-          </div>
-          </div><br>
 
+            <div class="form-group">
+              <label>Percentage<b class="red">*</b> </label>
+              <input *ngIf="educationvalue"  type="number"  formControlName="hscMark" [(ngModel)]="educationvalue.hscMark" [ngClass]="{ 'is-invalid': submitted && e?.hscMark?.errors }">
+              <input *ngIf="!educationvalue"   type="number" formControlName="hscMark"[ngClass]="{ 'is-invalid': submitted && e?.hscMark?.errors }">
+              <div *ngIf="submitted && e?.hscMark?.errors" >
+                <div *ngIf="e?.hscMark?.errors?.required" class="red">12th Mark is required</div>
+                <div *ngIf="e?.hscMark?.errors?.max" class="red">enter the correct percentage</div>
+                <div *ngIf="e?.hscMark?.errors?.min" class="red">Invalid marks</div>
+            </div>
+            </div><br>
           
-          <div class="form-group">
-            <label>Percentage / CGPA <b class="red">*</b></label>
-            <input *ngIf="educationvalue"  type="number"  formControlName="sslcMark" [(ngModel)]="educationvalue.sslcMark" [ngClass]="{ 'is-invalid': submitted && e?.sslcMark?.errors }">
-            <input *ngIf="!educationvalue"   type="number" formControlName="sslcMark" [ngClass]="{ 'is-invalid': submitted && e?.sslcMark?.errors }">
-            <div *ngIf="submitted && e?.sslcMark?.errors" >
-              <div *ngIf="e?.sslcMark?.errors?.required" class="red">10th Mark is required</div>
-              <div *ngIf="e?.sslcMark?.errors?.minlength" class="red">Enter the marks  correctly</div>
-              <div *ngIf="e?.sslcMark?.errors?.maxlength" class="red">Enter the marks  correctly</div>
-          </div>
-          </div><br>
+            <mat-label><b>Enter your Graduation details</b></mat-label><br>
 
-
-          
-
-          <mat-label><b>Enter your HSC/ 12th details</b></mat-label><br>
-
-          <div class="form-group">
-            <label>Name of the School </label>
-            <input *ngIf="educationvalue"  type="text" formControlName="hscSchoolName" [(ngModel)]="educationvalue.hscSchoolName" >
-            <input *ngIf="!educationvalue"   type="text" formControlName="hscSchoolName" >
-          </div><br>
-
-          <div class="form-group">
-            <label>Year of Completion<b class="red">*</b></label>
-            <select  *ngIf="educationvalue"  formControlName="hscYear" [(ngModel)]="educationvalue.hscYear" >
-              <option *ngFor="let p of allyears" [value]="p.name">
-                {{ p.name }}
-              </option>
-            </select>
-            <select  *ngIf="!educationvalue"  formControlName="hscYear" [ngClass]="{ 'is-invalid': submitted && e?.hscYear?.errors }"  >
-              <option *ngFor="let p of allyears" [value]="p.name">
-                {{ p.name }}
-              </option>
-            </select>
-            <div *ngIf="submitted && e?.hscYear?.errors" >
-              <div *ngIf="e?.hscYear?.errors?.required" class="red">12th std year is required</div>
+            <div class="form-group">
+              <label>State</label>
+              <select  *ngIf="educationvalue"  formControlName="colname" (click)="savestate()">
+                <option *ngFor="let p of states" [value]="p">
+                  {{ p }}
+                </option>
+              </select>
+              <select  *ngIf="!educationvalue" formControlName="colname"  >
+                <option *ngFor="let p of states" [value]="p">
+                  {{ p}}
+                </option>
+              </select>
+            </div><br>
+            
+            <div class="form-group">
+              <label>District</label>
+              <select  *ngIf="educationvalue"  formControlName="colname" (click)="savebutton()">
+                <option *ngFor="let p of districts" [value]="p">
+                  {{ p }}
+                </option>
+              </select>
+              <select  *ngIf="!educationvalue" formControlName="colname"  >
+                <option *ngFor="let p of districts" [value]="p">
+                  {{ p}}
+                </option>
+              </select>
+            </div><br>
+  
+            <div class="form-group">
+              <label>Name of the institution</label>
+              <select  *ngIf="educationvalue"  formControlName="colname"  >
+                <option *ngFor="let p of values" [value]="p">
+                  {{ p }}
+                </option>
+              </select>
+              <select  *ngIf="!educationvalue" formControlName="colname" >
+                <option *ngFor="let p of values" [value]="p">
+                  {{ p}}
+                </option>
+              </select>
+            </div><br>
+  
+            
+            <div class="form-group">
+              <label>Year of Completion<b class="red">*</b></label>
+              <select  *ngIf="educationvalue"  formControlName="collegeYear" [(ngModel)]="educationvalue.collegeYear" >
+                <option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </option>
+              </select>
+              <select  *ngIf="!educationvalue"  formControlName="collegeYear" [ngClass]="{ 'is-invalid': submitted && e?.collegeYear?.errors }"   >
+                <option *ngFor="let p of allyears" [value]="p.name">
+                  {{ p.name }}
+                </option>
+              </select>
+              <div *ngIf="submitted && e?.collegeYear?.errors" >
+                <div *ngIf="e?.collegeYear?.errors?.required" class="red">Graduation year is required</div>
+                
+            </div>
+            </div><br>
+  
               
-          </div>
-          </div><br>
-
-         
-
+             
           <div class="form-group">
             <label>Percentage / CGPA<b class="red">*</b> </label>
-            <input *ngIf="educationvalue"  type="number"  formControlName="hscMark" [(ngModel)]="educationvalue.hscMark" [ngClass]="{ 'is-invalid': submitted && e?.hscMark?.errors }">
-            <input *ngIf="!educationvalue"   type="number" formControlName="hscMark"[ngClass]="{ 'is-invalid': submitted && e?.hscMark?.errors }">
-            <div *ngIf="submitted && e?.hscMark?.errors" >
-              <div *ngIf="e?.hscMark?.errors?.required" class="red">12th Mark is required</div>
-              <div *ngIf="e?.hscMark?.errors?.minlength" class="red">Enter the marks  correctly</div>
-              <div *ngIf="e?.hscMark?.errors?.maxlength" class="red">Enter the marks  correctly</div>
+            <input *ngIf="educationvalue"  type="number" formControlName="collegeMark" [(ngModel)]="educationvalue.collegeMark" [ngClass]="{ 'is-invalid': submitted && e?.collegeMark?.errors }" >
+            <input *ngIf="!educationvalue"   type="number" formControlName="collegeMark" [ngClass]="{ 'is-invalid': submitted && e?.collegeMark?.errors }"  >
+            <div *ngIf="submitted && e?.collegeMark?.errors" >
+              <div *ngIf="e?.collegeMark?.errors?.required" class="red">College Mark is required</div>
+              <div *ngIf="e?.collegeMark?.errors?.max" class="red">enter the correct percentage/CGPA</div>
+              <div *ngIf="e?.collegeMark?.errors?.min" class="red">Invalid marks</div>
           </div>
           </div><br>
-        
-          <mat-label><b>Enter your Graduation details</b></mat-label><br>
 
-          <div class="form-group">
-            <label>State</label>
-            <select  *ngIf="educationvalue"  formControlName="colname" (click)="savestate()">
-              <option *ngFor="let p of states" [value]="p">
-                {{ p }}
-              </option>
-            </select>
-            <select  *ngIf="!educationvalue" formControlName="colname"  >
-              <option *ngFor="let p of states" [value]="p">
-                {{ p}}
-              </option>
-            </select>
-          </div><br>
+
           
           <div class="form-group">
-            <label>District</label>
-            <select  *ngIf="educationvalue"  formControlName="colname" (click)="savebutton()">
-              <option *ngFor="let p of districts" [value]="p">
-                {{ p }}
-              </option>
-            </select>
-            <select  *ngIf="!educationvalue" formControlName="colname"  >
-              <option *ngFor="let p of districts" [value]="p">
-                {{ p}}
-              </option>
-            </select>
-          </div><br>
-
-          <div class="form-group">
-            <label>Name of the institution</label>
-            <select  *ngIf="educationvalue"  formControlName="colname" >
-              <option *ngFor="let p of values" [value]="p">
-                {{ p }}
-              </option>
-            </select>
-            <select  *ngIf="!educationvalue" formControlName="colname"  >
-              <option *ngFor="let p of values" [value]="p">
-                {{ p}}
-              </option>
-            </select>
-          </div><br>
-
-
-
-
-          <div class="form-group">
-            <label>Degree/Branch</label>
-            <select [(ngModel)] = "textvalue" (click)="savevalue()" formControlName="collegeDegree" >
+            <label>Degree/Branch</label><h5 class="optiontype">(If Others,enter your degree/branch after clicking others)</h5>
+            <select [(ngModel)] = "textvalue" (click)="savevalue()" formControlName="collegeDegree"  >
               <option *ngFor="let p of degree" [value]="p.name">
                 {{ p.name}}
               </option>
             </select>
-          </div>
-
-          <input [type]="FieldTextType ? 'text' : 'hidden'"  formControlName="collegeDegree"> <br>
-
-          
-          <div class="form-group">
-            <label>Year of Completion<b class="red">*</b></label>
-            <select  *ngIf="educationvalue"  formControlName="collegeYear" [(ngModel)]="educationvalue.collegeYear" >
-              <option *ngFor="let p of allyears" [value]="p.name">
-                {{ p.name }}
-              </option>
-            </select>
-            <select  *ngIf="!educationvalue"  formControlName="collegeYear" [ngClass]="{ 'is-invalid': submitted && e?.collegeYear?.errors }"   >
-              <option *ngFor="let p of allyears" [value]="p.name">
-                {{ p.name }}
-              </option>
-            </select>
-            <div *ngIf="submitted && e?.collegeYear?.errors" >
-              <div *ngIf="e?.collegeYear?.errors?.required" class="red">Graduation year is required</div>
-              
-          </div>
           </div><br>
 
-            
-           
-        <div class="form-group">
-          <label>Percentage / CGPA<b class="red">*</b> </label>
-          <input *ngIf="educationvalue"  type="number" formControlName="collegeMark" [(ngModel)]="educationvalue.collegeMark" [ngClass]="{ 'is-invalid': submitted && e?.collegeMark?.errors }" >
-          <input *ngIf="!educationvalue"   type="number" formControlName="collegeMark" [ngClass]="{ 'is-invalid': submitted && e?.collegeMark?.errors }"  >
-          <div *ngIf="submitted && e?.collegeMark?.errors" >
-            <div *ngIf="e?.collegeMark?.errors?.required" class="red">College Mark is required</div>
-          
-        </div>
-        </div><br>
-      
-
-            
-          <div class="card-body text-center">
-            <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg" (click)="SubmitEducation()" >Save & Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="SubmitEducation()">Save & Next</button>
-          </div>
-        </form>
-      </mat-step>
-
-
-        <mat-step [stepControl]="exFormGroup" label="Experience">
-          <form [formGroup]="exFormGroup">
-
-
-                
-        <div class="form-group">
-          <label>Name of the Organization </label>
-          <input *ngIf="workvalue"  type="text"  formControlName="companyName" [(ngModel)]="workvalue.companyName" >
-          <input *ngIf="!workvalue"   type="text"  formControlName="companyName"  >
-        </div><br>
-             
+          <label *ngIf="FieldTextType">Enter your Degree/Branch</label>
+          <input [type]="FieldTextType ? 'text' : 'hidden'"  formControlName="collegeDegree"> <br>
         
-        <div class="form-group">
-          <label>Start Date</label>
-          <input class="datepicker" *ngIf="workvalue"  type="text" formControlName="startDate" [matDatepicker]="picker" [(ngModel)]="workvalue.startDate">
-          <input  class="datepicker" *ngIf="!workvalue"   type="text" formControlName="startDate" [matDatepicker]="picker" >
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </div><br>
-
-        <div class="form-group">
-          <label>Start Date</label>
-          <input class="datepicker" *ngIf="workvalue"  type="text" formControlName="endDate" [matDatepicker]="picker1" [(ngModel)]="workvalue.endDate">
-          <input  class="datepicker" *ngIf="!workvalue"   type="text" formControlName="endDate" [matDatepicker]="picker1" >
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1></mat-datepicker>
-        </div><br>
-
-        
-        <div class="form-group">
-          <label>Description </label>
-          <textarea *ngIf="workvalue" matInput formControlName="description"  [(ngModel)]="workvalue.description"></textarea>
-          <textarea *ngIf="!workvalue" matInput formControlName="description" ></textarea>
-        </div><br>
-              
-
   
-              <div class="card-body text-center">
-                <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg" (click)="SubmitWork()" >Save & Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
-            <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="SubmitWork()">Save & Next</button> 
-               
+              
+            <div class="card-body text-center">
+              <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg" (click)="SubmitEducation()" >Save & Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="SubmitEducation()">Save & Next</button>
             </div>
-           
-
           </form>
-          </mat-step>
-
-          <mat-step [stepControl]="skillFormGroup" label="Skills">
-            <form [formGroup]="skillFormGroup">
-
-
-              <div class="form-group">
-                <label>Languages </label>
-                <input *ngIf="skillvalue"  type="text"  formControlName="languages" [(ngModel)]="skillvalue.languages" >
-                <input *ngIf="!skillvalue"   type="text"  formControlName="languages" >
-              </div><br>
+        </mat-step>
+  
+  
+          <mat-step [stepControl]="exFormGroup" label="Experience">
+            <form [formGroup]="exFormGroup">
 
 
-              <div class="form-group">
-                <label>Technical Skills </label>
-                <textarea *ngIf="skillvalue" matInput formControlName="technicalSkills"  [(ngModel)]="skillvalue.technicalSkills"></textarea>
-                <textarea *ngIf="!skillvalue" matInput formControlName="technicalSkills" ></textarea>
-              </div><br>
+                  
+          <div class="form-group">
+            <label>Name of the Organization </label>
+            <input *ngIf="workvalue"  type="text"  formControlName="companyName" [(ngModel)]="workvalue.companyName" >
+            <input *ngIf="!workvalue"   type="text"  formControlName="companyName"  >
+          </div><br>
                
+          
+          <div class="form-group">
+            <label>Start Date</label>
+            <input class="datepicker" *ngIf="workvalue"  type="text" formControlName="startDate" [matDatepicker]="picker" [(ngModel)]="workvalue.startDate">
+            <input  class="datepicker" *ngIf="!workvalue"   type="text" formControlName="startDate" [matDatepicker]="picker" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </div><br>
+
+          <div class="form-group">
+            <label>Start Date</label>
+            <input class="datepicker" *ngIf="workvalue"  type="text" formControlName="endDate" [matDatepicker]="picker1" [(ngModel)]="workvalue.endDate">
+            <input  class="datepicker" *ngIf="!workvalue"   type="text" formControlName="endDate" [matDatepicker]="picker1" >
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </div><br>
+  
+          
+          <div class="form-group">
+            <label>Description </label>
+            <textarea *ngIf="workvalue" matInput formControlName="description"  [(ngModel)]="workvalue.description"></textarea>
+            <textarea *ngIf="!workvalue" matInput formControlName="description" ></textarea>
+          </div><br>
+                
   
     
                 <div class="card-body text-center">
-                  <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg" (click)="SubmitSkill()" >Save & Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <button mat-stroked-button (click)="save()" class="btn btn-secondary btn-lg">Submit</button>&nbsp;&nbsp;
+                  <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg" (click)="SubmitWork()" >Save & Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+              <button mat-stroked-button  matStepperNext class="btn btn-secondary btn-lg" (click)="SubmitWork()">Save & Next</button> 
                  
-                 </div>
-                 <div class="alert card-body text-center" *ngIf="serverErrorMessages">
-                  {{serverErrorMessages}}
-                </div>
+              </div>
+             
+  
             </form>
             </mat-step>
-    </mat-horizontal-stepper>
-  
-  </mat-card>
+
+            <mat-step [stepControl]="skillFormGroup" label="Skills">
+              <form [formGroup]="skillFormGroup">
+
+
+                <div class="form-group">
+                  <label>Languages </label>
+                  <input *ngIf="skillvalue"  type="text"  formControlName="languages" [(ngModel)]="skillvalue.languages" >
+                  <input *ngIf="!skillvalue"   type="text"  formControlName="languages" >
+                </div><br>
+
+
+                <div class="form-group">
+                  <label>Technical Skills </label>
+                  <textarea *ngIf="skillvalue" matInput formControlName="technicalSkills"  [(ngModel)]="skillvalue.technicalSkills"></textarea>
+                  <textarea *ngIf="!skillvalue" matInput formControlName="technicalSkills" ></textarea>
+                </div><br>
+                 
+    
+      
+                  <div class="card-body text-center">
+                    <button mat-stroked-button  matStepperPrevious class="btn btn-secondary btn-lg" (click)="SubmitSkill()" >Save & Back</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button mat-stroked-button (click)="save()" class="btn btn-secondary btn-lg">Submit</button>&nbsp;&nbsp;
+                   
+                   </div>
+                   <div class="alert card-body text-center" *ngIf="serverErrorMessages">
+                    {{serverErrorMessages}}
+                  </div>
+              </form>
+              </mat-step>
+      </mat-horizontal-stepper>
+    
+    </mat-card>

@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators ,FormArray, FormControl} from '@angular/forms';
 import { ResumeService } from '../resume.service';
 import { CollegeService } from '../college.service';
+import Swal from 'sweetalert2';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-edit',
@@ -40,7 +42,7 @@ export class EditComponent implements OnInit{
 
 
   submitted = false;
-  firstname?:'';
+  collegename?:string;
   isLinear = true;
   personalFormGroup!: FormGroup;
   educationFormGroup!: FormGroup;
@@ -66,14 +68,14 @@ export class EditComponent implements OnInit{
     this.educationFormGroup = this._formBuilder.group({
       sslcSchoolName: [''],
       sslcYear: ['',Validators.required],
-      sslcMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      sslcMark: ['',[Validators.required,Validators.max(100), Validators.min(1)]],
       hscSchoolName: [''],
       hscYear: ['',Validators.required],
-      hscMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      hscMark: ['',[Validators.required,Validators.max(100), Validators.min(1)]],
       colname: [''],
       collegeDegree: [''],
       collegeYear: ['',Validators.required],
-      collegeMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      collegeMark: ['',[Validators.required,Validators.max(100), Validators.min(1)]],
       
 
     });
@@ -112,6 +114,14 @@ export class EditComponent implements OnInit{
   save(){
 
     this.submitted = true;
+    if(this.educationFormGroup.controls['colname'].value){
+       this.collegename= this.educationFormGroup.controls['colname'].value;
+    }
+    if(!this.educationFormGroup.controls['colname'].value){
+      this.collegename= this.data.collegeName;
+   }
+
+
     const datavalue = {
       firstname: this.personalFormGroup.controls['firstname'].value,
       lastname: this.personalFormGroup.controls['lastname'].value,
@@ -142,13 +152,27 @@ export class EditComponent implements OnInit{
       .subscribe(
         response => {
           console.log(response);
-          this.reloadPage();
+          
         },
         error => {
           console.log(error);
         });
-       alert('success');
+        Swal.fire({
+          title: 'Success',
+          text: 'Your data has been saved successfully!',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.reloadPage();
+          }
+        })
   }
+
+
+
+
   reloadPage() {
     window.location.reload();
   }
@@ -206,6 +230,11 @@ export class EditComponent implements OnInit{
       console.log(this.FieldTextType)
       this.FieldTextType = !this.FieldTextType;
     }
+  }
+
+
+  Submitform(){
+    this.submitted = true;
   }
 
 

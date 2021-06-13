@@ -78,14 +78,14 @@ export class CreateComponent implements OnInit {
     this.educationFormGroup = this._formBuilder.group({
       sslcSchoolName: [''],
       sslcYear: ['',Validators.required],
-      sslcMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      sslcMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(1),Validators.max(100), Validators.min(1)]],
       hscSchoolName: [''],
       hscYear: ['',Validators.required],
-      hscMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      hscMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(1),Validators.max(100), Validators.min(1)]],
       colname: [''],
       collegeDegree: [''],
       collegeYear: ['',Validators.required],
-      collegeMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(2),Validators.max(100), Validators.min(10)]],
+      collegeMark: ['',[Validators.required,Validators.maxLength(3), Validators.minLength(1),Validators.max(100), Validators.min(1)]],
       
 
     });
