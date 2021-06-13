@@ -163,44 +163,32 @@
 
             <div class="form-group">
               <label>State</label>
-              <select  *ngIf="educationvalue"  formControlName="colname" (click)="savestate()">
+              <select   formControlName="colname" (click)="savestate()">
                 <option *ngFor="let p of states" [value]="p">
                   {{ p }}
                 </option>
               </select>
-              <select  *ngIf="!educationvalue" formControlName="colname"  >
-                <option *ngFor="let p of states" [value]="p">
-                  {{ p}}
-                </option>
-              </select>
+              
             </div><br>
             
             <div class="form-group">
               <label>District</label>
-              <select  *ngIf="educationvalue"  formControlName="colname" (click)="savebutton()">
+              <select   formControlName="colname" (click)="savebutton()">
                 <option *ngFor="let p of districts" [value]="p">
                   {{ p }}
                 </option>
               </select>
-              <select  *ngIf="!educationvalue" formControlName="colname"  >
-                <option *ngFor="let p of districts" [value]="p">
-                  {{ p}}
-                </option>
-              </select>
+              
             </div><br>
   
             <div class="form-group">
               <label>Name of the institution</label>
-              <select  *ngIf="educationvalue"  formControlName="colname"  >
+              <select   formControlName="colname"  >
                 <option *ngFor="let p of values" [value]="p">
                   {{ p }}
                 </option>
               </select>
-              <select  *ngIf="!educationvalue" formControlName="colname" >
-                <option *ngFor="let p of values" [value]="p">
-                  {{ p}}
-                </option>
-              </select>
+              
             </div><br>
   
             
