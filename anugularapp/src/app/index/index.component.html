@@ -1,0 +1,27 @@
+<!-- <app-navigation [data]="data"></app-navigation> -->
+
+<mat-toolbar class="navbar ">
+    <div>Resume Builder</div>
+  </mat-toolbar>
+  
+  <div class="main-div ">
+  
+    <mat-card class="example-card rgba-black-strong py-5 px-4">
+  
+        <img mat-card-image src="/assets/image/users.png" alt="Photo of a Shiba Inu">
+        <mat-card-content class="card-body text-center">
+          <h2 class="card-title">
+            WELCOME TO RESUME BUILDER!!
+          </h2>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="card-body text-center">
+            
+            <span> <button mat-stroked-button class="btn btn-secondary btn-lg" (click)="openDialog()">Sign-in</button></span>&nbsp;&nbsp;
+            <span> <button mat-stroked-button class="btn btn-secondary btn-lg" (click)="onLogin()">Login</button></span>
+          
+        </div>
+        </mat-card-actions>
+      </mat-card>
+   </div>
+  

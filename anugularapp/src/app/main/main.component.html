@@ -1,0 +1,87 @@
+
+  <!-- <app-user-data></app-user-data> -->
+  <mat-toolbar class="navbar">
+    <div>Resume Builder</div>
+    <div >
+    <span  *ngIf="role1"> <span  *ngIf="!value"><button mat-stroked-button class="btn btn-secondary btn-lg" (click)="openDialog(userDetails)">Create</button></span></span>&nbsp;&nbsp;
+    <span> <button mat-stroked-button class="btn btn-secondary btn-lg" (click)="onLogout()">Logout</button></span></div>
+ </mat-toolbar>
+ <div class="main-div">
+  <mat-card class="mat-card" style="width: 1100px;">
+  
+    <div ><div *ngIf="value">
+      <table *ngIf="role1" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+          <tbody>
+          <tr>
+            
+                <td>{{value.firstname}}</td>
+                <td>{{value.lastname}}</td>
+                <td>{{userDetails.email}}</td>
+              
+              <td>
+                <a class="action-btn" (click)="openDialogedit(value)" data-tool-tip="Edit">
+                  <i class="material-icons">edit</i>
+                </a>&nbsp;&nbsp;
+                <a class="action-btn" (click)="deleteTutorial(value._id)" data-tool-tip="Delete">
+                  <i class="material-icons">delete</i>
+                </a>&nbsp;&nbsp;
+                <a class="action-btn" (click)="openDialogview(value)" data-tool-tip="View">
+                  <i class="material-icons">visibility</i>
+                </a>
+          </tr>
+          
+        </tbody>
+      </table>
+      </div>
+        <table *ngIf="!value" class="table table-striped" >
+          <thead>
+          <tr>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr></thead>
+          <tr >
+            <th colspan="4"><div class="nodata"><h3>No data available</h3></div></th>
+            </tr>
+      </table>
+      <table *ngIf="rolevalue" class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of value" >
+          <td>{{user.firstname}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.email}}</td>
+        
+        <td>
+          <a *ngIf="role2" class="action-btn" (click)="openDialogedit(user)" data-tool-tip="Edit">
+            <i class="material-icons">edit</i>
+          </a>&nbsp;&nbsp;
+          <a *ngIf="role2" class="action-btn" (click)="deleteTutorial(user._id)" data-tool-tip="Delete">
+            <i class="material-icons">delete</i>
+          </a>&nbsp;&nbsp;
+          <a class="action-btn" (click)="openDialogview(user)" data-tool-tip="View" >
+            <i class="material-icons" >visibility</i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+      </div>
+  </mat-card></div>
+
