@@ -3,7 +3,6 @@ require('./models/db');
 require('./config/passportConfig');
 var formController = require('./controllers/formController.js');
 var college = require('./controllers/college.js');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -25,7 +24,7 @@ app.use('/college', college);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/*', (req,res) => {
+app.get('*', (req,res) => {
 
     res.sendFile(path.join(__dirname , 'public/index.html'));
     });
@@ -37,8 +36,9 @@ app.use((err, req, res, next) => {
         Object.keys(err.errors).forEach(key => valErrors.push(err.errors[key].message));
         res.status(422).send(valErrors)
     }
+
 });
+const port = process.env.PORT || 8080 ;
 
 // start server
-const port = process.env.PORT || 8080
-app.listen(port, () => console.log(`Server started at port : ${port}`));
+app.listen(port, () => console.log(`Server started at port : ${process.env.PORT}`));
