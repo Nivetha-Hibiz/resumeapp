@@ -39,6 +39,7 @@ import { MainComponent } from './main/main.component';
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
 import { ViewComponent } from './view/view.component';
+import { SampleComponent } from './sample/sample.component';
 
 
 
@@ -65,6 +66,7 @@ const appRoutes: Routes = [
     CreateComponent,
     EditComponent,
     ViewComponent,
+    SampleComponent,
     
    
     

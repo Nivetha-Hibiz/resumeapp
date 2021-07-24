@@ -1,6 +1,6 @@
 {
     "development": {
-        "PORT": 8080,
+        
         "MONGODB_URI": "mongodb+srv://New_User:abcd1234@cluster0.amfjo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
         "JWT_SECRET": "SECRET#123",
         "JWT_EXP": "5m"
