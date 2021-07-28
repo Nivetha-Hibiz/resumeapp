@@ -1,7 +1,7 @@
 import { Component , OnInit} from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
-
+let mySrc = 1;
 @Component({
   selector: 'app-sample',
   templateUrl: './sample.component.html',
@@ -62,10 +62,20 @@ export class SampleComponent implements OnInit{
     * processRecording Do what ever you want with blob
     * @param  {any} blob Blog
     */
-   processRecording(blob : any) {
-       this.url = URL.createObjectURL(blob);
-       console.log(blob);
+   processRecording(blobb : any) {
+       this.url = URL.createObjectURL(blobb);
+       console.log(blobb);
        console.log(this.url);
+       //var blobb = dataURLtoBlob('data:text/plain;base64,YWFhYWFhYQ==');
+       var a         = document.createElement('a');
+       a.href        = this.url; 
+       a.target      = 'D:/hibiz';
+       a.download    = 'A' + mySrc + '.mp3';
+       // this.sectiontime();
+       document.body.appendChild(a);
+       a.click();
+       mySrc = mySrc + 1;
+       
    }
    /**
     * Process Error.
@@ -86,3 +96,4 @@ export class SampleComponent implements OnInit{
 
    }
 }
+
