@@ -1,91 +1,119 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit , ViewChild} from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ResumeService } from '../resume.service';
+
 let mySrc = 1;
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
 @Component({
   selector: 'app-sample',
   templateUrl: './sample.component.html',
   styleUrls: ['./sample.component.css']
 })
+
+
 export class SampleComponent implements OnInit{
 
-  //Lets initiate Record OBJ
-   record : any;
-   //Will use this flag for detect recording
+
+  private stream?: MediaStream;
+  private recordRTC: any;
+ 
+   private record :  any;
    recording = false;
-   //Url of Blob
-    url : any;
-   error :  any;
-   constructor(private domSanitizer: DomSanitizer) {
+   private videorecording = false;
+   private url : any;
+   
+   private error : any;
+   dataurl : any;
+
+
+   constructor(private domSanitizer: DomSanitizer,private http: HttpClient,private resumeService?: ResumeService) {
    }
-   sanitize(url:string){
-       return this.domSanitizer.bypassSecurityTrustUrl(url);
+   sanitize(dataurl:string){
+       return this.domSanitizer.bypassSecurityTrustUrl(dataurl);
    }
-   /**
-    * Start recording.
-    */
+  
+   
    initiateRecording() {
        
-       this.url="";
+       this.dataurl="";
        this.recording = true;
        
        let mediaConstraints = {
         video: false,
         audio: true
     };
- navigator.mediaDevices
- .getUserMedia(mediaConstraints)
- .then(this.successCallback.bind(this), this.errorCallback.bind(this));
-      
+    navigator.mediaDevices
+                .getUserMedia(mediaConstraints)
+                .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+
    }
-   /**
-    * Will be called automatically.
-    */
-   successCallback(stream :  any) {
+
+
+   successCallback(stream : any) {
        var options = {
            mimeType: "audio/wav",
            numberOfAudioChannels: 1
        };
-       //Start Actuall Recording
+       
        var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
        this.record = new StereoAudioRecorder(stream, options);
        this.record.record();
    }
-   /**
-    * Stop recording.
-    */
+
+  
    stopRecording() {
        this.recording = false;
        this.record.stop(this.processRecording.bind(this));
+       
    }
    /**
     * processRecording Do what ever you want with blob
     * @param  {any} blob Blog
     */
-   processRecording(blobb : any) {
-       this.url = URL.createObjectURL(blobb);
-       console.log(blobb);
+   
+   processRecording(blob : any) {
+       this.url = URL.createObjectURL(blob);
+       console.log(blob);
        console.log(this.url);
-       //var blobb = dataURLtoBlob('data:text/plain;base64,YWFhYWFhYQ==');
-       var a         = document.createElement('a');
-       a.href        = this.url; 
-       a.target      = 'D:/hibiz';
-       a.download    = 'A' + mySrc + '.mp3';
-       // this.sectiontime();
-       document.body.appendChild(a);
-       a.click();
-       mySrc = mySrc + 1;
-       
+       blobToBase64(blob).then(res => {
+            
+        this.dataurl = res;  
+        let b64 = this.dataurl.replace(/^data:.+;base64,/, '');
+        // this.http.post('http://localhost:8080/form/audio', {base64string: b64}).subscribe((res)=>{
+            // console.log(res)
+            
+          // });
+
+          this.resumeService?.getaudio(b64)
+          .subscribe(
+            response => {
+              console.log(response);
+             
+            },
+            error => {
+              console.log(error);
+            });
+           
+      
+         
+      });
+      
    }
-   /**
-    * Process Error.
-    */
+
+
+   
+
    errorCallback(error : any) {
        this.error = 'Can not play audio in your browser';
    }
 
 
    ngOnInit() {
+   
      let mediaConstraints = {
            video: false,
            audio: true
@@ -95,5 +123,28 @@ export class SampleComponent implements OnInit{
     .then();
 
    }
+  
+   
+
+   
 }
+
+
+
+const blobToBase64 = (blob :  any) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    return new Promise(resolve => {
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
+  };
+
+
+
+
+
+
+
 

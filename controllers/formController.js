@@ -126,4 +126,21 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+
+router.post('/audio', (req, res) => {
+ 
+    
+    
+    let b64= req.body.b64;
+    console.log(b64);
+    fs.writeFile(path.join(__dirname,"../public/assets/image","USER" + i +".mp3"), b64, {encoding: 'base64'},() =>{
+        i=i+1;
+        console.log('File created');
+        console.log(path.join(__dirname,"../public/assets/image","USER" + i +".mp3"));
+    });
+
+    res.send({text: 'file successfully uploaded'});
+})
+
+
 module.exports = router;

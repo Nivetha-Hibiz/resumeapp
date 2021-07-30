@@ -51,4 +51,9 @@ export class ResumeService {
   findByTitle(title: any) {
     return this.http.get(`${baseUrl}?title=${title}`);
   }
+
+  getaudio(b64 :  string)
+  {
+    return this.http.post(`${baseUrl}/audio`, b64);
+  }
 }
