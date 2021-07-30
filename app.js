@@ -24,7 +24,7 @@ app.use('/college', college);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/*', (req,res) => {
+app.get('*', (req,res) => {
 
     res.sendFile(path.join(__dirname , 'public/index.html'));
     });
@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
     }
 
 });
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080 ;
 
 // start server
 app.listen(port, () => console.log(`Server started at port : ${process.env.PORT}`));
