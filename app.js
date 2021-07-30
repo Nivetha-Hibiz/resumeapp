@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
     }
 
 });
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 // start server
 app.listen(process.env.PORT, () => console.log(`Server started at port : ${process.env.PORT}`));
